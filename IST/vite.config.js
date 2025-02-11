@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   proxy: {
-    "/api": "http://localhost:5000/api/v1",
+    "/api": "https://innersparktherapy-4.onrender.com"
   },
 })
