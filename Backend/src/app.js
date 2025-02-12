@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-   origin: 'http://innersparktherapy.com/api/v1',
+   origin: 'http://innersparktherapy.com',
    methods: ['GET', 'POST', 'PUT', 'DELETE'],  
    credentials: true,  
  }));
