@@ -153,6 +153,38 @@ export const Consultancy = asyncHandler(async (req, res) => {
     if (!form) {
       throw new ApiError(500, "Failed to insert form data");
     }
+   
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: emailId,
+      subject: "Contacting Inner Spark Therapy",
+      text: `Thank you for contacting us. Your gift will be delivered to your loved ones shortly.`,
+    };
+  
+    // Email to admin
+    const mailOptions1 = {
+      from: process.env.EMAIL_USER,
+      to: process.env.DEFAULT_EMAIL_USER,
+      subject: `Enquiry for Therapy Session by ${fullName}`,
+      text: `${fullName} has contacted us for Therapy Session which was gifted by his/her loved one.\n
+      Details of the customer:\n
+      Name: ${fullName}\n
+      Email: ${emailId}\n
+      Phone: ${contactNo}\n
+      PreviousCounseling: ${previousCounseling}\n
+      PreviousCounselingDetails: ${previousCounselingDetails}\n
+      Selfdescription: ${selfDescription}\n
+      isAbove18: ${isAbove18}\n
+      ParentConsent: ${parentConsent}\n
+      Reference: ${reference}\n`
+    };
+  
+    try {
+      // Send emails concurrently
+      await Promise.all([
+        transporter.sendMail(mailOptions),
+        transporter.sendMail(mailOptions1),
+      ]);
 
     return res
       .status(201)
