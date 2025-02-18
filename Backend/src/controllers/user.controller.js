@@ -185,11 +185,13 @@ export const Consultancy = asyncHandler(async (req, res) => {
         transporter.sendMail(mailOptions),
         transporter.sendMail(mailOptions1),
       ]);
-    }
-
     return res
       .status(201)
       .json(new ApiResponse(200, form, "Form data added successfully"));
+
+    }catch{
+      console.log("Error sending from details in mail")
+    }
   } catch (error) {
     console.error("Error posting form data:", error);
     throw new ApiError(500, "An error occurred while processing your request");
