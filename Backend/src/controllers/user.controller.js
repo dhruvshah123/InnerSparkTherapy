@@ -185,6 +185,7 @@ export const Consultancy = asyncHandler(async (req, res) => {
         transporter.sendMail(mailOptions),
         transporter.sendMail(mailOptions1),
       ]);
+    }
 
     return res
       .status(201)
